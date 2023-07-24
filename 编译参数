@@ -1,0 +1,8 @@
+
+tar zxf libevent-2.1.12-stable.tar.gz
+cd libevent-2.1.12-stable/
+mkdir build
+./configure --prefix=`pwd`/build --enable-thread-support --enable-debug-mode
+make -j4
+make install
+
