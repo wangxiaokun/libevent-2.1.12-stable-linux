@@ -1,0 +1,27 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "gdb调试libevent程序",   //名称随便取
+            "type": "cppdbg",       //正在使用的调试器,使用Visual Studio Windows时必须为cppvsdbg,使用GDB或LLDB时必须为cppdbg
+            "request": "launch",    //表示此配置是用于启动程序还是附加到已运行的实例上
+            "program": "${workspaceFolder}/sample/.libs/time-test",   //要执行的可执行文件的完整路径
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/sample/.libs",          //可执行程序完整路径（不包含程序名称）
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
