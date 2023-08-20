@@ -189,8 +189,8 @@ CONFIG_CLEAN_VPATH_FILES =
 am__EXEEXT_3 = sample/dns-example$(EXEEXT) \
 	sample/event-read-fifo$(EXEEXT) sample/hello-world$(EXEEXT) \
 	sample/http-server$(EXEEXT) sample/http-connect$(EXEEXT) \
-	sample/signal-test$(EXEEXT) sample/time-test$(EXEEXT) \
-	$(am__EXEEXT_2)
+	sample/signal-test$(EXEEXT) sample/filter-test$(EXEEXT) \
+	sample/time-test$(EXEEXT) $(am__EXEEXT_2)
 @BUILD_SAMPLES_TRUE@am__EXEEXT_4 = $(am__EXEEXT_3)
 am__EXEEXT_5 = test/bench$(EXEEXT) test/bench_cascade$(EXEEXT) \
 	test/bench_http$(EXEEXT) test/bench_httpclient$(EXEEXT) \
@@ -340,6 +340,9 @@ am_sample_event_read_fifo_OBJECTS = sample/event-read-fifo.$(OBJEXT)
 sample_event_read_fifo_OBJECTS = $(am_sample_event_read_fifo_OBJECTS)
 sample_event_read_fifo_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	libevent.la
+am_sample_filter_test_OBJECTS = sample/filter-test.$(OBJEXT)
+sample_filter_test_OBJECTS = $(am_sample_filter_test_OBJECTS)
+sample_filter_test_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
 am_sample_hello_world_OBJECTS = sample/hello-world.$(OBJEXT)
 sample_hello_world_OBJECTS = $(am_sample_hello_world_OBJECTS)
 sample_hello_world_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
@@ -493,6 +496,7 @@ am__depfiles_remade = $(DEPDIR)/epoll_sub.Plo ./$(DEPDIR)/buffer.Plo \
 	./$(DEPDIR)/signal.Plo ./$(DEPDIR)/strlcpy.Plo \
 	./$(DEPDIR)/win32select.Plo sample/$(DEPDIR)/dns-example.Po \
 	sample/$(DEPDIR)/event-read-fifo.Po \
+	sample/$(DEPDIR)/filter-test.Po \
 	sample/$(DEPDIR)/hello-world.Po \
 	sample/$(DEPDIR)/http-connect.Po \
 	sample/$(DEPDIR)/http-server.Po \
@@ -552,17 +556,17 @@ SOURCES = $(libevent_la_SOURCES) $(libevent_core_la_SOURCES) \
 	$(libevent_extra_la_SOURCES) $(libevent_openssl_la_SOURCES) \
 	$(libevent_pthreads_la_SOURCES) $(sample_dns_example_SOURCES) \
 	$(sample_event_read_fifo_SOURCES) \
-	$(sample_hello_world_SOURCES) $(sample_http_connect_SOURCES) \
-	$(sample_http_server_SOURCES) $(sample_https_client_SOURCES) \
-	$(sample_le_proxy_SOURCES) $(sample_signal_test_SOURCES) \
-	$(sample_time_test_SOURCES) $(test_bench_SOURCES) \
-	$(test_bench_cascade_SOURCES) $(test_bench_http_SOURCES) \
-	$(test_bench_httpclient_SOURCES) $(test_regress_SOURCES) \
-	$(test_test_changelist_SOURCES) $(test_test_closed_SOURCES) \
-	$(test_test_dumpevents_SOURCES) $(test_test_eof_SOURCES) \
-	$(test_test_fdleak_SOURCES) $(test_test_init_SOURCES) \
-	$(test_test_ratelim_SOURCES) $(test_test_time_SOURCES) \
-	$(test_test_weof_SOURCES)
+	$(sample_filter_test_SOURCES) $(sample_hello_world_SOURCES) \
+	$(sample_http_connect_SOURCES) $(sample_http_server_SOURCES) \
+	$(sample_https_client_SOURCES) $(sample_le_proxy_SOURCES) \
+	$(sample_signal_test_SOURCES) $(sample_time_test_SOURCES) \
+	$(test_bench_SOURCES) $(test_bench_cascade_SOURCES) \
+	$(test_bench_http_SOURCES) $(test_bench_httpclient_SOURCES) \
+	$(test_regress_SOURCES) $(test_test_changelist_SOURCES) \
+	$(test_test_closed_SOURCES) $(test_test_dumpevents_SOURCES) \
+	$(test_test_eof_SOURCES) $(test_test_fdleak_SOURCES) \
+	$(test_test_init_SOURCES) $(test_test_ratelim_SOURCES) \
+	$(test_test_time_SOURCES) $(test_test_weof_SOURCES)
 DIST_SOURCES = $(am__libevent_la_SOURCES_DIST) \
 	$(am__libevent_core_la_SOURCES_DIST) \
 	$(libevent_extra_la_SOURCES) \
@@ -570,8 +574,8 @@ DIST_SOURCES = $(am__libevent_la_SOURCES_DIST) \
 	$(am__libevent_pthreads_la_SOURCES_DIST) \
 	$(sample_dns_example_SOURCES) \
 	$(sample_event_read_fifo_SOURCES) \
-	$(sample_hello_world_SOURCES) $(sample_http_connect_SOURCES) \
-	$(sample_http_server_SOURCES) \
+	$(sample_filter_test_SOURCES) $(sample_hello_world_SOURCES) \
+	$(sample_http_connect_SOURCES) $(sample_http_server_SOURCES) \
 	$(am__sample_https_client_SOURCES_DIST) \
 	$(am__sample_le_proxy_SOURCES_DIST) \
 	$(sample_signal_test_SOURCES) $(sample_time_test_SOURCES) \
@@ -1201,7 +1205,7 @@ EVENT2_EXPORT = include/event2/buffer.h include/event2/buffer_compat.h \
 @INSTALL_LIBEVENT_FALSE@nodist_noinst_HEADERS = include/event2/event-config.h
 SAMPLES = sample/dns-example sample/event-read-fifo sample/hello-world \
 	sample/http-server sample/http-connect sample/signal-test \
-	sample/time-test $(am__append_7)
+	sample/filter-test sample/time-test $(am__append_7)
 @OPENSSL_TRUE@sample_le_proxy_SOURCES = sample/le-proxy.c
 @OPENSSL_TRUE@sample_le_proxy_LDADD = libevent.la libevent_openssl.la $(OPENSSL_LIBS) $(OPENSSL_LIBADD)
 @OPENSSL_TRUE@sample_le_proxy_CPPFLAGS = $(AM_CPPFLAGS) $(OPENSSL_INCS)
@@ -1216,6 +1220,8 @@ SAMPLES = sample/dns-example sample/event-read-fifo sample/hello-world \
 @OPENSSL_TRUE@sample_https_client_CPPFLAGS = $(AM_CPPFLAGS) $(OPENSSL_INCS)
 sample_event_read_fifo_SOURCES = sample/event-read-fifo.c
 sample_event_read_fifo_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
+sample_filter_test_SOURCES = sample/filter-test.c
+sample_filter_test_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
 sample_time_test_SOURCES = sample/time-test.c
 sample_time_test_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
 sample_signal_test_SOURCES = sample/signal-test.c
@@ -1541,6 +1547,12 @@ sample/event-read-fifo.$(OBJEXT): sample/$(am__dirstamp) \
 sample/event-read-fifo$(EXEEXT): $(sample_event_read_fifo_OBJECTS) $(sample_event_read_fifo_DEPENDENCIES) $(EXTRA_sample_event_read_fifo_DEPENDENCIES) sample/$(am__dirstamp)
 	@rm -f sample/event-read-fifo$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(sample_event_read_fifo_OBJECTS) $(sample_event_read_fifo_LDADD) $(LIBS)
+sample/filter-test.$(OBJEXT): sample/$(am__dirstamp) \
+	sample/$(DEPDIR)/$(am__dirstamp)
+
+sample/filter-test$(EXEEXT): $(sample_filter_test_OBJECTS) $(sample_filter_test_DEPENDENCIES) $(EXTRA_sample_filter_test_DEPENDENCIES) sample/$(am__dirstamp)
+	@rm -f sample/filter-test$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(sample_filter_test_OBJECTS) $(sample_filter_test_LDADD) $(LIBS)
 sample/hello-world.$(OBJEXT): sample/$(am__dirstamp) \
 	sample/$(DEPDIR)/$(am__dirstamp)
 
@@ -1793,6 +1805,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/win32select.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/dns-example.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/event-read-fifo.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/filter-test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/hello-world.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/http-connect.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sample/$(DEPDIR)/http-server.Po@am__quote@ # am--include-marker
@@ -2884,6 +2897,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/win32select.Plo
 	-rm -f sample/$(DEPDIR)/dns-example.Po
 	-rm -f sample/$(DEPDIR)/event-read-fifo.Po
+	-rm -f sample/$(DEPDIR)/filter-test.Po
 	-rm -f sample/$(DEPDIR)/hello-world.Po
 	-rm -f sample/$(DEPDIR)/http-connect.Po
 	-rm -f sample/$(DEPDIR)/http-server.Po
@@ -3010,6 +3024,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/win32select.Plo
 	-rm -f sample/$(DEPDIR)/dns-example.Po
 	-rm -f sample/$(DEPDIR)/event-read-fifo.Po
+	-rm -f sample/$(DEPDIR)/filter-test.Po
 	-rm -f sample/$(DEPDIR)/hello-world.Po
 	-rm -f sample/$(DEPDIR)/http-connect.Po
 	-rm -f sample/$(DEPDIR)/http-server.Po

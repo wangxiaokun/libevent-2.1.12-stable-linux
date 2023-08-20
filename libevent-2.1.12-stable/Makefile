@@ -189,8 +189,8 @@ am__EXEEXT_2 = sample/le-proxy$(EXEEXT) \
 am__EXEEXT_3 = sample/dns-example$(EXEEXT) \
 	sample/event-read-fifo$(EXEEXT) sample/hello-world$(EXEEXT) \
 	sample/http-server$(EXEEXT) sample/http-connect$(EXEEXT) \
-	sample/signal-test$(EXEEXT) sample/time-test$(EXEEXT) \
-	$(am__EXEEXT_2)
+	sample/signal-test$(EXEEXT) sample/filter-test$(EXEEXT) \
+	sample/time-test$(EXEEXT) $(am__EXEEXT_2)
 am__EXEEXT_4 = $(am__EXEEXT_3)
 am__EXEEXT_5 = test/bench$(EXEEXT) test/bench_cascade$(EXEEXT) \
 	test/bench_http$(EXEEXT) test/bench_httpclient$(EXEEXT) \
@@ -273,7 +273,7 @@ libevent_la_OBJECTS = $(am_libevent_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
-am__v_lt_1 = 
+am__v_lt_1 =
 libevent_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libevent_la_LDFLAGS) $(LDFLAGS) -o $@
@@ -340,6 +340,9 @@ am_sample_event_read_fifo_OBJECTS = sample/event-read-fifo.$(OBJEXT)
 sample_event_read_fifo_OBJECTS = $(am_sample_event_read_fifo_OBJECTS)
 sample_event_read_fifo_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	libevent.la
+am_sample_filter_test_OBJECTS = sample/filter-test.$(OBJEXT)
+sample_filter_test_OBJECTS = $(am_sample_filter_test_OBJECTS)
+sample_filter_test_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
 am_sample_hello_world_OBJECTS = sample/hello-world.$(OBJEXT)
 sample_hello_world_OBJECTS = $(am_sample_hello_world_OBJECTS)
 sample_hello_world_DEPENDENCIES = $(am__DEPENDENCIES_1) libevent.la
@@ -464,11 +467,11 @@ am__v_P_1 = :
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
+am__v_GEN_1 =
 AM_V_at = $(am__v_at_$(V))
 am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
 am__v_at_0 = @
-am__v_at_1 = 
+am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
@@ -493,6 +496,7 @@ am__depfiles_remade = $(DEPDIR)/epoll_sub.Plo ./$(DEPDIR)/buffer.Plo \
 	./$(DEPDIR)/signal.Plo ./$(DEPDIR)/strlcpy.Plo \
 	./$(DEPDIR)/win32select.Plo sample/$(DEPDIR)/dns-example.Po \
 	sample/$(DEPDIR)/event-read-fifo.Po \
+	sample/$(DEPDIR)/filter-test.Po \
 	sample/$(DEPDIR)/hello-world.Po \
 	sample/$(DEPDIR)/http-connect.Po \
 	sample/$(DEPDIR)/http-server.Po \
@@ -539,7 +543,7 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CC = $(am__v_CC_$(V))
 am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
 am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
+am__v_CC_1 =
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -547,22 +551,22 @@ LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
+am__v_CCLD_1 =
 SOURCES = $(libevent_la_SOURCES) $(libevent_core_la_SOURCES) \
 	$(libevent_extra_la_SOURCES) $(libevent_openssl_la_SOURCES) \
 	$(libevent_pthreads_la_SOURCES) $(sample_dns_example_SOURCES) \
 	$(sample_event_read_fifo_SOURCES) \
-	$(sample_hello_world_SOURCES) $(sample_http_connect_SOURCES) \
-	$(sample_http_server_SOURCES) $(sample_https_client_SOURCES) \
-	$(sample_le_proxy_SOURCES) $(sample_signal_test_SOURCES) \
-	$(sample_time_test_SOURCES) $(test_bench_SOURCES) \
-	$(test_bench_cascade_SOURCES) $(test_bench_http_SOURCES) \
-	$(test_bench_httpclient_SOURCES) $(test_regress_SOURCES) \
-	$(test_test_changelist_SOURCES) $(test_test_closed_SOURCES) \
-	$(test_test_dumpevents_SOURCES) $(test_test_eof_SOURCES) \
-	$(test_test_fdleak_SOURCES) $(test_test_init_SOURCES) \
-	$(test_test_ratelim_SOURCES) $(test_test_time_SOURCES) \
-	$(test_test_weof_SOURCES)
+	$(sample_filter_test_SOURCES) $(sample_hello_world_SOURCES) \
+	$(sample_http_connect_SOURCES) $(sample_http_server_SOURCES) \
+	$(sample_https_client_SOURCES) $(sample_le_proxy_SOURCES) \
+	$(sample_signal_test_SOURCES) $(sample_time_test_SOURCES) \
+	$(test_bench_SOURCES) $(test_bench_cascade_SOURCES) \
+	$(test_bench_http_SOURCES) $(test_bench_httpclient_SOURCES) \
+	$(test_regress_SOURCES) $(test_test_changelist_SOURCES) \
+	$(test_test_closed_SOURCES) $(test_test_dumpevents_SOURCES) \
+	$(test_test_eof_SOURCES) $(test_test_fdleak_SOURCES) \
+	$(test_test_init_SOURCES) $(test_test_ratelim_SOURCES) \
+	$(test_test_time_SOURCES) $(test_test_weof_SOURCES)
 DIST_SOURCES = $(am__libevent_la_SOURCES_DIST) \
 	$(am__libevent_core_la_SOURCES_DIST) \
 	$(libevent_extra_la_SOURCES) \
@@ -570,8 +574,8 @@ DIST_SOURCES = $(am__libevent_la_SOURCES_DIST) \
 	$(am__libevent_pthreads_la_SOURCES_DIST) \
 	$(sample_dns_example_SOURCES) \
 	$(sample_event_read_fifo_SOURCES) \
-	$(sample_hello_world_SOURCES) $(sample_http_connect_SOURCES) \
-	$(sample_http_server_SOURCES) \
+	$(sample_filter_test_SOURCES) $(sample_hello_world_SOURCES) \
+	$(sample_http_connect_SOURCES) $(sample_http_server_SOURCES) \
 	$(am__sample_https_client_SOURCES_DIST) \
 	$(am__sample_le_proxy_SOURCES_DIST) \
 	$(sample_signal_test_SOURCES) $(sample_time_test_SOURCES) \
@@ -882,22 +886,22 @@ AUTOMAKE = ${SHELL} /tmp/wxk/read-libevent-2.1.12-stable-linux/libevent-2.1.12-s
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -Wall -fno-strict-aliasing -pthread -W -Wfloat-equal -Wundef -Wpointer-arith -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings -Wredundant-decls -Wmissing-declarations -Wnested-externs -Wbad-function-cast -Wno-unused-parameter -Wstrict-aliasing -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op
+CFLAGS = -g -Wall -fno-strict-aliasing -pthread -W -Wfloat-equal -Wundef -Wpointer-arith -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings -Wredundant-decls -Wmissing-declarations -Wnested-externs -Wbad-function-cast -Wno-unused-parameter -Wstrict-aliasing -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op
 CPP = gcc -E
-CPPFLAGS = 
+CPPFLAGS =
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DLLTOOL = false
-DOXYGEN_PAPER_SIZE = 
-DSYMUTIL = 
-DUMPBIN = 
+DOXYGEN_PAPER_SIZE =
+DSYMUTIL =
+DUMPBIN =
 DX_CONFIG = ${top_srcdir}/Doxyfile
 DX_DOCDIR = doxygen
-DX_DOT = 
-DX_DOXYGEN = 
-DX_DVIPS = 
-DX_EGREP = 
+DX_DOT =
+DX_DOXYGEN =
+DX_DVIPS =
+DX_EGREP =
 DX_ENV =  SRCDIR='.' PROJECT='libevent' VERSION='2.1.12-stable' HAVE_DOT='NO' GENERATE_MAN='NO' GENERATE_RTF='NO' GENERATE_XML='NO' GENERATE_HTMLHELP='NO' GENERATE_CHI='NO' GENERATE_HTML='NO' GENERATE_LATEX='NO'
 DX_FLAG_chi = 0
 DX_FLAG_chm = 0
@@ -909,19 +913,19 @@ DX_FLAG_pdf = 0
 DX_FLAG_ps = 0
 DX_FLAG_rtf = 0
 DX_FLAG_xml = 0
-DX_HHC = 
-DX_LATEX = 
-DX_MAKEINDEX = 
-DX_PDFLATEX = 
-DX_PERL = 
+DX_HHC =
+DX_LATEX =
+DX_MAKEINDEX =
+DX_PDFLATEX =
+DX_PERL =
 DX_PROJECT = libevent
-ECHO_C = 
+ECHO_C =
 ECHO_N = -n
-ECHO_T = 
+ECHO_T =
 EGREP = /usr/bin/grep -E
-EV_LIB_GDI = 
-EV_LIB_WS32 = 
-EXEEXT = 
+EV_LIB_GDI =
+EV_LIB_WS32 =
+EXEEXT =
 FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
 INSTALL = /usr/bin/install -c
@@ -930,34 +934,34 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = 
-LIBEVENT_GC_SECTIONS = 
-LIBOBJS = 
-LIBS = 
+LDFLAGS =
+LIBEVENT_GC_SECTIONS =
+LIBOBJS =
+LIBS =
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBTOOL_DEPS = build-aux/ltmain.sh
-LIPO = 
+LIPO =
 LN_S = ln -s
-LTLIBOBJS = 
-LT_SYS_LIBRARY_PATH = 
+LTLIBOBJS =
+LT_SYS_LIBRARY_PATH =
 MAKEINFO = ${SHELL} /tmp/wxk/read-libevent-2.1.12-stable-linux/libevent-2.1.12-stable/build-aux/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
-NMEDIT = 
+NMEDIT =
 OBJDUMP = objdump
 OBJEXT = o
-OPENSSL_INCS =  
-OPENSSL_LIBADD = 
-OPENSSL_LIBS = -lssl -lcrypto     
-OTOOL = 
-OTOOL64 = 
+OPENSSL_INCS =
+OPENSSL_LIBADD =
+OPENSSL_LIBS = -lssl -lcrypto
+OTOOL =
+OTOOL64 =
 PACKAGE = libevent
-PACKAGE_BUGREPORT = 
+PACKAGE_BUGREPORT =
 PACKAGE_NAME = libevent
 PACKAGE_STRING = libevent 2.1.12-stable
 PACKAGE_TARNAME = libevent
-PACKAGE_URL = 
+PACKAGE_URL =
 PACKAGE_VERSION = 2.1.12-stable
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
@@ -966,27 +970,27 @@ PTHREAD_CFLAGS = -pthread
 PTHREAD_LIBS =  $(am__append_14)
 RANLIB = ranlib
 SED = /usr/bin/sed
-SET_MAKE = 
+SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 2.1.12-stable
-ZLIB_LIBS = -lz 
+ZLIB_LIBS = -lz
 abs_builddir = /tmp/wxk/read-libevent-2.1.12-stable-linux/libevent-2.1.12-stable
 abs_srcdir = /tmp/wxk/read-libevent-2.1.12-stable-linux/libevent-2.1.12-stable
 abs_top_builddir = /tmp/wxk/read-libevent-2.1.12-stable-linux/libevent-2.1.12-stable
 abs_top_srcdir = /tmp/wxk/read-libevent-2.1.12-stable-linux/libevent-2.1.12-stable
 ac_ct_AR = ar
 ac_ct_CC = gcc
-ac_ct_DUMPBIN = 
-acx_pthread_config = 
+ac_ct_DUMPBIN =
+acx_pthread_config =
 am__include = include
 am__leading_dot = .
-am__quote = 
+am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
 build = x86_64-pc-linux-gnu
-build_alias = 
+build_alias =
 build_cpu = x86_64
 build_os = linux-gnu
 build_vendor = pc
@@ -997,7 +1001,7 @@ docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
-host_alias = 
+host_alias =
 host_cpu = x86_64
 host_os = linux-gnu
 host_vendor = pc
@@ -1020,8 +1024,8 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target_alias = 
-top_build_prefix = 
+target_alias =
+top_build_prefix =
 top_builddir = .
 top_srcdir = .
 
@@ -1161,7 +1165,7 @@ LIBEVENT_LIBS_LA = libevent.la libevent_core.la libevent_extra.la \
 lib_LTLIBRARIES = $(LIBEVENT_LIBS_LA)
 pkgconfig_DATA = $(LIBEVENT_PKGCONFIG)
 #noinst_LTLIBRARIES = $(LIBEVENT_LIBS_LA)
-EXTRA_SOURCE = 
+EXTRA_SOURCE =
 noinst_HEADERS = $(am__append_6) $(am__append_9) test/regress.h \
 	test/regress_thread.h test/tinytest.h test/tinytest_local.h \
 	test/tinytest_macros.h WIN32-Code/nmake/evconfig-private.h \
@@ -1201,7 +1205,7 @@ nodist_include_event2_HEADERS = include/event2/event-config.h
 #nodist_noinst_HEADERS = include/event2/event-config.h
 SAMPLES = sample/dns-example sample/event-read-fifo sample/hello-world \
 	sample/http-server sample/http-connect sample/signal-test \
-	sample/time-test $(am__append_7)
+	sample/filter-test sample/time-test $(am__append_7)
 sample_le_proxy_SOURCES = sample/le-proxy.c
 sample_le_proxy_LDADD = libevent.la libevent_openssl.la $(OPENSSL_LIBS) $(OPENSSL_LIBADD)
 sample_le_proxy_CPPFLAGS = $(AM_CPPFLAGS) $(OPENSSL_INCS)
@@ -1216,6 +1220,8 @@ sample_https_client_LDADD = libevent.la \
 sample_https_client_CPPFLAGS = $(AM_CPPFLAGS) $(OPENSSL_INCS)
 sample_event_read_fifo_SOURCES = sample/event-read-fifo.c
 sample_event_read_fifo_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
+sample_filter_test_SOURCES = sample/filter-test.c
+sample_filter_test_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
 sample_time_test_SOURCES = sample/time-test.c
 sample_time_test_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
 sample_signal_test_SOURCES = sample/signal-test.c
@@ -1303,9 +1309,9 @@ test_bench_http_SOURCES = test/bench_http.c
 test_bench_http_LDADD = $(LIBEVENT_GC_SECTIONS) libevent.la
 test_bench_httpclient_SOURCES = test/bench_httpclient.c
 test_bench_httpclient_LDADD = $(LIBEVENT_GC_SECTIONS) libevent_core.la
-SYS_CORE_LIBS = 
+SYS_CORE_LIBS =
 #SYS_CORE_LIBS = -liphlpapi
-SYS_LIBS = 
+SYS_LIBS =
 #SYS_LIBS = -lws2_32 -lshell32 -ladvapi32
 SYS_SRC = $(am__append_20) $(am__append_21) \
 	$(am__append_22) $(am__append_23) \
@@ -1317,7 +1323,7 @@ SYS_SRC = $(am__append_20) $(am__append_21) \
 #	$(am__append_22) $(am__append_23) \
 #	$(am__append_24) $(am__append_25) \
 #	$(am__append_26) $(am__append_27)
-SYS_INCLUDES = 
+SYS_INCLUDES =
 #SYS_INCLUDES = -IWIN32-Code -IWIN32-Code/nmake
 CORE_SRC = \
 	buffer.c				\
@@ -1342,9 +1348,9 @@ EXTRAS_SRC = \
 	evrpc.c					\
 	http.c
 
-NO_UNDEFINED = 
+NO_UNDEFINED =
 #NO_UNDEFINED = -no-undefined
-MAYBE_CORE = 
+MAYBE_CORE =
 #MAYBE_CORE = libevent_core.la
 AM_CFLAGS = $(LIBEVENT_CFLAGS)
 AM_CPPFLAGS = -I$(srcdir)/compat -I./include -I$(srcdir)/include $(SYS_INCLUDES) $(LIBEVENT_CPPFLAGS)
@@ -1428,7 +1434,7 @@ config.h: stamp-h1
 stamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status
 	@rm -f stamp-h1
 	cd $(top_builddir) && $(SHELL) ./config.status config.h
-$(srcdir)/config.h.in:  $(am__configure_deps) 
+$(srcdir)/config.h.in:  $(am__configure_deps)
 	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
 	rm -f stamp-h1
 	touch $@
@@ -1509,19 +1515,19 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
-libevent.la: $(libevent_la_OBJECTS) $(libevent_la_DEPENDENCIES) $(EXTRA_libevent_la_DEPENDENCIES) 
+libevent.la: $(libevent_la_OBJECTS) $(libevent_la_DEPENDENCIES) $(EXTRA_libevent_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libevent_la_LINK) $(am_libevent_la_rpath) $(libevent_la_OBJECTS) $(libevent_la_LIBADD) $(LIBS)
 
-libevent_core.la: $(libevent_core_la_OBJECTS) $(libevent_core_la_DEPENDENCIES) $(EXTRA_libevent_core_la_DEPENDENCIES) 
+libevent_core.la: $(libevent_core_la_OBJECTS) $(libevent_core_la_DEPENDENCIES) $(EXTRA_libevent_core_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libevent_core_la_LINK) $(am_libevent_core_la_rpath) $(libevent_core_la_OBJECTS) $(libevent_core_la_LIBADD) $(LIBS)
 
-libevent_extra.la: $(libevent_extra_la_OBJECTS) $(libevent_extra_la_DEPENDENCIES) $(EXTRA_libevent_extra_la_DEPENDENCIES) 
+libevent_extra.la: $(libevent_extra_la_OBJECTS) $(libevent_extra_la_DEPENDENCIES) $(EXTRA_libevent_extra_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libevent_extra_la_LINK) $(am_libevent_extra_la_rpath) $(libevent_extra_la_OBJECTS) $(libevent_extra_la_LIBADD) $(LIBS)
 
-libevent_openssl.la: $(libevent_openssl_la_OBJECTS) $(libevent_openssl_la_DEPENDENCIES) $(EXTRA_libevent_openssl_la_DEPENDENCIES) 
+libevent_openssl.la: $(libevent_openssl_la_OBJECTS) $(libevent_openssl_la_DEPENDENCIES) $(EXTRA_libevent_openssl_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libevent_openssl_la_LINK) $(am_libevent_openssl_la_rpath) $(libevent_openssl_la_OBJECTS) $(libevent_openssl_la_LIBADD) $(LIBS)
 
-libevent_pthreads.la: $(libevent_pthreads_la_OBJECTS) $(libevent_pthreads_la_DEPENDENCIES) $(EXTRA_libevent_pthreads_la_DEPENDENCIES) 
+libevent_pthreads.la: $(libevent_pthreads_la_OBJECTS) $(libevent_pthreads_la_DEPENDENCIES) $(EXTRA_libevent_pthreads_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libevent_pthreads_la_LINK) $(am_libevent_pthreads_la_rpath) $(libevent_pthreads_la_OBJECTS) $(libevent_pthreads_la_LIBADD) $(LIBS)
 sample/$(am__dirstamp):
 	@$(MKDIR_P) sample
@@ -1541,6 +1547,12 @@ sample/event-read-fifo.$(OBJEXT): sample/$(am__dirstamp) \
 sample/event-read-fifo$(EXEEXT): $(sample_event_read_fifo_OBJECTS) $(sample_event_read_fifo_DEPENDENCIES) $(EXTRA_sample_event_read_fifo_DEPENDENCIES) sample/$(am__dirstamp)
 	@rm -f sample/event-read-fifo$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(sample_event_read_fifo_OBJECTS) $(sample_event_read_fifo_LDADD) $(LIBS)
+sample/filter-test.$(OBJEXT): sample/$(am__dirstamp) \
+	sample/$(DEPDIR)/$(am__dirstamp)
+
+sample/filter-test$(EXEEXT): $(sample_filter_test_OBJECTS) $(sample_filter_test_DEPENDENCIES) $(EXTRA_sample_filter_test_DEPENDENCIES) sample/$(am__dirstamp)
+	@rm -f sample/filter-test$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(sample_filter_test_OBJECTS) $(sample_filter_test_LDADD) $(LIBS)
 sample/hello-world.$(OBJEXT): sample/$(am__dirstamp) \
 	sample/$(DEPDIR)/$(am__dirstamp)
 
@@ -1793,6 +1805,7 @@ include ./$(DEPDIR)/strlcpy.Plo # am--include-marker
 include ./$(DEPDIR)/win32select.Plo # am--include-marker
 include sample/$(DEPDIR)/dns-example.Po # am--include-marker
 include sample/$(DEPDIR)/event-read-fifo.Po # am--include-marker
+include sample/$(DEPDIR)/filter-test.Po # am--include-marker
 include sample/$(DEPDIR)/hello-world.Po # am--include-marker
 include sample/$(DEPDIR)/http-connect.Po # am--include-marker
 include sample/$(DEPDIR)/http-server.Po # am--include-marker
@@ -2509,7 +2522,7 @@ $(TEST_SUITE_LOG): $(TEST_LOGS)
 	fi;								\
 	$$success || exit 1
 
-check-TESTS: 
+check-TESTS:
 	@list='$(RECHECK_LOGS)';           test -z "$$list" || rm -f $$list
 	@list='$(RECHECK_LOGS:.log=.trs)'; test -z "$$list" || rm -f $$list
 	@test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
@@ -2519,7 +2532,7 @@ check-TESTS:
 	log_list=`echo $$log_list`; trs_list=`echo $$trs_list`; \
 	$(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_LOG) TEST_LOGS="$$log_list"; \
 	exit $$?;
-recheck: all 
+recheck: all
 	@test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
 	@set +e; $(am__set_TESTS_bases); \
 	bases=`for i in $$bases; do echo $$i; done \
@@ -2884,6 +2897,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/win32select.Plo
 	-rm -f sample/$(DEPDIR)/dns-example.Po
 	-rm -f sample/$(DEPDIR)/event-read-fifo.Po
+	-rm -f sample/$(DEPDIR)/filter-test.Po
 	-rm -f sample/$(DEPDIR)/hello-world.Po
 	-rm -f sample/$(DEPDIR)/http-connect.Po
 	-rm -f sample/$(DEPDIR)/http-server.Po
@@ -3010,6 +3024,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/win32select.Plo
 	-rm -f sample/$(DEPDIR)/dns-example.Po
 	-rm -f sample/$(DEPDIR)/event-read-fifo.Po
+	-rm -f sample/$(DEPDIR)/filter-test.Po
 	-rm -f sample/$(DEPDIR)/hello-world.Po
 	-rm -f sample/$(DEPDIR)/http-connect.Po
 	-rm -f sample/$(DEPDIR)/http-server.Po
